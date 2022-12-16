@@ -1,0 +1,17 @@
+server:
+  port: 5006
+
+spring:
+  application:
+    name: DemoApp
+  boot:
+    admin:
+      client:
+        url: http://localhost:${server.port}/admin
+      context-path: /admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
