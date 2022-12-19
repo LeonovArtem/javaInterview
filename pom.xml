@@ -12,8 +12,8 @@
 
     <modules>
         <module>spring</module>
-        <module>javaTest</module>
         <module>javaCore</module>
+        <module>liveCoding</module>
     </modules>
 
     <parent>
