@@ -4,6 +4,11 @@
 3. **Out of turn** - вне очереди
 4. **directly** - прямо
 5. **relating to** - относящихся
+6. **probably** - наверное
+7. **mostly** - по большей части
+8. **regarding** - относительно
+9. **realize** - я понимаю
+10. **appreciate** - ценить
 
 # Technical words
 1. **compiler** - компилятор
@@ -14,4 +19,4 @@
 6. **maintainable** - поддерживаемый (легкий в сопровождении)
 7. **requirement** - требование
 8. **substitution** - заменяемый
-8. **recognize** - распознавать, (узнаваемый)
+9. **recognize** - распознавать, (узнаваемый)

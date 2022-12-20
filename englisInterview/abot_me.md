@@ -1,5 +1,5 @@
 # My responsibilities (roles):
-1) Participate in code reviews process. ()
+1) Participate in code reviews process.
 2) Development of new business cases
 3) Improving the existing codebase
 4) Databases design
@@ -30,12 +30,12 @@ It was a new experience for me
 
 # Strong
 
-1) I spend a lot of time learning new
+1. I spend a lot of time learning new
 
 OR
 
-2) I spend a lot of time learning modern programming approaches
-3) I try to develop in different directions (Я стараюсь развиваться в разных направлениях)
+2. I spend a lot of time learning modern programming approaches
+3. I try to develop in different directions (Я стараюсь развиваться в разных направлениях)
 
 # Общии фразы
 
