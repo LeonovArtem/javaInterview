@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mysql:
+    image: percona/percona-server:8.0.17
+    container_name: javainterview-mysql
+    restart: 'no'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - TZ=Europe/Moscow
+    ports:
+      - "3311:3306"

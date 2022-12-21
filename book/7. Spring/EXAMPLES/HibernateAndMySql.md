@@ -1,15 +1,8 @@
-server:
-  port: 5006
+# Mysql
 
-spring:
-  application:
-    name: DemoApp
-  boot:
-    admin:
-      client:
-        url: http://localhost:${server.port}/admin
-      context-path: /admin
+[application.yml](..%2F..%2F..%2Fspring%2Fsrc%2Fmain%2Fresources%2Fapplication.yml)
 
+```yaml
   datasource:
     hikari:
       data-source-properties:
@@ -41,9 +34,19 @@ spring:
       hibernate:
         format_sql: 'true'
     open-in-view: 'false'
+```
+pom.xml
 
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
+        <!-- MySql -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+```
