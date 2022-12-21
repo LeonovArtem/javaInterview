@@ -1,18 +1,29 @@
 package al.spring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Getter(AccessLevel.NONE)
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "body", length = 500)
+    private String body;
 }
