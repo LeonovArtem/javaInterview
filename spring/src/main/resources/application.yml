@@ -10,8 +10,19 @@ spring:
         url: http://localhost:${server.port}/admin
       context-path: /admin
 
-management:
+  datasource:
+    url: jdbc:h2:mem:test_db
+    username: user
+    password: user
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
   endpoints:
     web:
       exposure:
         include: "*"
+
