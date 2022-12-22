@@ -1,13 +1,11 @@
 package al.spring.controller;
 
+import al.spring.exception.PostNotFoundException;
 import al.spring.model.Post;
 import al.spring.repository.PostRepository;
 import al.spring.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,14 @@ public class PostController {
     @GetMapping
     public List<Post> getAll() {
         return postRepository.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Post findById(@PathVariable int id) {
+        return postRepository
+                .findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id))
+                ;
     }
 
     @PostMapping
