@@ -22,7 +22,7 @@ public class PostService {
 
     public List<Post> loadPosts() {
         ResponseEntity<List<Post>> exchange = restTemplate.exchange(
-                postApiUrl,
+                postApiUrl + "/posts",
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 new ParameterizedTypeReference<List<Post>>() {
