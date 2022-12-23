@@ -14,12 +14,13 @@
         <module>spring</module>
         <module>javaCore</module>
         <module>liveCoding</module>
+        <module>reactiveSpring</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <relativePath/>
     </parent>
 </project>

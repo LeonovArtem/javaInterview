@@ -7,8 +7,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:${server.port}/admin
-      context-path: /admin
+        url: http://localhost:${server.port}
 
   datasource:
     hikari:
