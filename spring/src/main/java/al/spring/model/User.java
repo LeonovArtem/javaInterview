@@ -5,23 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Post {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title")
-    private String title;
+    private String name;
 
-    @Column(name = "body", length = 500)
-    private String body;
-
-    @ManyToOne
-    private User user;
+    @Fetch(FetchMode.JOIN)
+    @OneToMany
+    private List<Post> posts;
 }

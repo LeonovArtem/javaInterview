@@ -1,9 +1,9 @@
 package com.aleonov.reactivespring.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @NoArgsConstructor
 public class Post {
     private Integer id;

@@ -10,22 +10,6 @@ spring:
         url: http://localhost:${server.port}
 
   datasource:
-    hikari:
-      data-source-properties:
-        useServerPrepStmts: 'true'
-        cacheServerConfiguration: 'true'
-        prepStmtCacheSize: '250'
-        prepStmtCacheSqlLimit: '2048'
-        useLocalTransactionState: 'true'
-        cacheResultSetMetadata: 'true'
-        cachePrepStmts: 'true'
-        rewriteBatchedStatements: 'true'
-        elideSetAutoCommits: 'true'
-        useLocalSessionState: 'true'
-        maintainTimeStats: 'false'
-      pool-name: ${spring.application.name}-pool
-      transaction-isolation: TRANSACTION_READ_COMMITTED
-      maximum-pool-size: '40'
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3311}/${MYSQL_DATABASE:test-db}?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Europe/Moscow
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -34,13 +18,14 @@ spring:
 
   jpa:
     hibernate:
-      naming-strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
       ddl-auto: update
     properties:
       hibernate:
         format_sql: 'true'
     open-in-view: 'false'
+    show-sql: true
 
+management:
   endpoints:
     web:
       exposure:

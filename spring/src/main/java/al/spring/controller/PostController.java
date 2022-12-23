@@ -1,8 +1,7 @@
 package al.spring.controller;
 
-import al.spring.exception.PostNotFoundException;
 import al.spring.model.Post;
-import al.spring.repository.PostRepository;
+import al.spring.service.PostLoaderService;
 import al.spring.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,34 +12,32 @@ import java.util.List;
 @RequestMapping("post")
 @RequiredArgsConstructor
 public class PostController {
-    private final PostRepository postRepository;
+    private final PostLoaderService postLoaderService;
     private final PostService postService;
 
     @GetMapping
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return postService.list();
     }
 
     @GetMapping("{id}")
     public Post findById(@PathVariable int id) {
-        return postRepository
-                .findById(id)
-                .orElseThrow(() -> new PostNotFoundException(id))
-                ;
+        return postService.getById(id);
     }
 
     @PostMapping
-    public void create() {
-        var post = (new Post())
-                .setUserId(1)
-                .setTitle("first")
-                .setBody("it is body...");
-        postRepository.save(post);
+    public void create(Post post) {
+        postService.create(post);
+    }
+
+    @DeleteMapping
+    public void delete(int id) {
+        postService.deleteById(id);
     }
 
     @PostMapping("load")
-    public List<Post> showLoadPosts() {
-        var posts = postService.loadPosts();
+    public List<Post> loadPosts() {
+        var posts = postLoaderService.loadPosts();
 
         return posts;
     }
