@@ -23,6 +23,6 @@ public class User {
     private String name;
 
     @Fetch(FetchMode.JOIN)
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Post> posts;
 }
