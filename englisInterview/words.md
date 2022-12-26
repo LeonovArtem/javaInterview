@@ -9,6 +9,7 @@
 8. **regarding** - относительно
 9. **realize** - я понимаю
 10. **appreciate** - ценить
+11. **it works for me** - Меня устраивает
 
 # Technical words
 1. **compiler** - компилятор
@@ -20,3 +21,4 @@
 7. **requirement** - требование
 8. **substitution** - заменяемый
 9. **recognize** - распознавать, (узнаваемый)
+9. **efficient** - эффективный (So it must be more efficient)
