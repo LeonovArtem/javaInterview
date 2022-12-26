@@ -4,6 +4,7 @@ import al.spring.dto.UserDto;
 import al.spring.mapper.UserMapper;
 import al.spring.model.User;
 import al.spring.service.UserService;
+import al.spring.service.userNotification.UserNotifyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
+    private final UserNotifyService userNotifyService;
 
     @GetMapping
     public List<User> list() {
@@ -32,5 +34,10 @@ public class UserController {
     @GetMapping("{id}")
     public User findById(@PathVariable int id) {
         return userService.findById(id);
+    }
+
+    @GetMapping("send-message")
+    public void sendNotification(String message){
+        userNotifyService.notify(message);
     }
 }
