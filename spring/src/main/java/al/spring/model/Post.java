@@ -21,7 +21,4 @@ public class Post {
 
     @Column(name = "body", length = 500)
     private String body;
-
-    @ManyToOne
-    private User user;
 }

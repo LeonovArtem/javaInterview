@@ -22,7 +22,7 @@ public class User {
 
     private String name;
 
-    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.JOIN)
     @OneToMany(fetch = FetchType.LAZY)
     private List<Post> posts;
 }
