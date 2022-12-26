@@ -22,8 +22,10 @@ public class UserController {
     private final UserNotifyService userNotifyService;
 
     @GetMapping
-    public List<User> list() {
-        return userService.list();
+    public List<UserDto> list() {
+        return userService.list().stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("mapper/{id}")

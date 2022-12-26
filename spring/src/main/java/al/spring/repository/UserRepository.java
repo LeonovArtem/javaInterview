@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     @Override
-    @EntityGraph(attributePaths = {"posts"})
+    @EntityGraph(attributePaths = {"posts", "roles"})
     List<User> findAll();
 }
