@@ -16,4 +16,9 @@ public class UserLikeController {
     public void like(int userId) {
         userLike.increaseLikeByTransaction(userId);
     }
+
+    @GetMapping("rabbit")
+    public void increaseLike(int userId) {
+        userLike.publish(userId);
+    }
 }

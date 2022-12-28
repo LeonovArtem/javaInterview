@@ -23,7 +23,33 @@ spring:
       hibernate:
         format_sql: 'true'
     open-in-view: 'false'
-    show-sql: true
+#    show-sql: true
+
+  rabbitmq:
+    password: ${RABBITMQ_PASSWORD:guest}
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    listener:
+      simple:
+        retry:
+          initial-interval: '1000'
+          enabled: 'true'
+          multiplier: '2.0'
+          max-attempts: '3'
+    virtual-host: ${RABBITMQ_VHOST:/}
+
+# RabbitMQ: Queues
+amqp:
+  rabbit:
+    queue:
+      exchange:
+        topic: demo_topic_exchange
+        direct: demo_direct_exchange
+      user_like_queue:
+        cnt_consumers: 1
+        queue_name: user_like_queue
+        routing_key: user_like_routing_key
 
 management:
   endpoint:
@@ -36,7 +62,6 @@ management:
   tracing:
     sampling:
       probability: 1.0
-
 
 posts:
   api:

@@ -1,15 +1,14 @@
 package al.spring.controller;
 
 import al.spring.dto.UserDto;
+import al.spring.dto.UserRequestDto;
 import al.spring.mapper.UserMapper;
 import al.spring.model.User;
+import al.spring.service.UserFactory;
 import al.spring.service.UserService;
 import al.spring.service.userNotification.UserNotifyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
     private final UserNotifyService userNotifyService;
+    private final UserFactory userFactory;
 
     @GetMapping
     public List<UserDto> list() {
@@ -39,7 +39,12 @@ public class UserController {
     }
 
     @GetMapping("send-message")
-    public void sendNotification(String message){
+    public void sendNotification(String message) {
         userNotifyService.notify(message);
+    }
+
+    @PostMapping
+    public User createUser(@RequestBody UserRequestDto userRequestDto) {
+        return userFactory.registerAccount(userRequestDto);
     }
 }
