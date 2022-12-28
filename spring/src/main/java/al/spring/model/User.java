@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.SortComparator;
-import org.hibernate.annotations.SortNatural;
+import org.hibernate.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +24,9 @@ public class User {
     private Integer id;
 
     private String name;
+
+    @ColumnDefault("0")
+    private Long countLikes;
 
     @Fetch(FetchMode.JOIN)
     @OneToMany(fetch = FetchType.LAZY)
