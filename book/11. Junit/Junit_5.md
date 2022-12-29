@@ -1,6 +1,9 @@
 # Junit
 Docs: https://junit.org/junit5/docs/current/user-guide/
 
+* [Assertions](#1-assertions)
+* [Сортировка](#2-order)
+
 ## Жизненный цикл
 
 ![test_life_cycle.jpg](img%2Ftest_life_cycle.jpg)
@@ -145,7 +148,7 @@ First test executed!
 4. @AfterAll
 
 
-### 1. Простой пример
+### 1. Assertions
 ```java
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -167,7 +170,7 @@ class FirstExample {
     }
 }
 ```
-### 2. Сортировка
+### 2. Order
 Сортировка методов
 
 * @Order(1)
@@ -200,4 +203,3 @@ public class OrderedMethodTest {
     }
 }
 ```
-
