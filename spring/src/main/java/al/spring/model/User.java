@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.SortComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.TreeSet;
 @Setter
 @NoArgsConstructor
 @Accessors(chain = true)
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +30,7 @@ public class User {
     private String name;
 
     @ColumnDefault("0")
-    private Long countLikes;
+    private Integer countLikes;
 
     @Fetch(FetchMode.JOIN)
     @OneToMany(fetch = FetchType.LAZY)
