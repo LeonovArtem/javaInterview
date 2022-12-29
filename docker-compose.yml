@@ -29,19 +29,32 @@ services:
       - "15672:15672"
       - "5672:5672"
 
-  # For testcontainers speedup, see USE_DOCKER_COMPOSE_SERVICES
-  demo-db-test:
-    container_name: demo-db-test
+  demo-db:
+    container_name: demo-db
     image: postgres:14.6
     environment:
-      POSTGRES_DB: test-db
+      POSTGRES_DB: demo-db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: user
     ports:
       - "55326:5432"
     volumes:
+      - demo-db:/var/lib/postgres
+    command: [ "postgres", "-c", "log_statement=all" ]
+
+  demo-db-test:
+    container_name: demo-db-test
+    image: postgres:14.6
+    environment:
+      POSTGRES_DB: test-db
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - "55328:5432"
+    volumes:
       - demo-db-test:/var/lib/postgres
     command: [ "postgres", "-c", "log_statement=all" ]
 
 volumes:
+  demo-db:
   demo-db-test:
