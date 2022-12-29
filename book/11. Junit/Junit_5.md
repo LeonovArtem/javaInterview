@@ -10,6 +10,7 @@ Example:
 import org.junit.jupiter.api.*;
 
 public class FirstCycleTest {
+    // Должны быть static!
     @BeforeAll
     static void beforeAll(){
         System.out.println("@BeforeAll");
@@ -35,6 +36,7 @@ public class FirstCycleTest {
         System.out.println("@AfterEach");
     }
 
+    // Должны быть static!
     @AfterAll
     static void afterAll(){
         System.out.println("@AfterAll");
@@ -51,6 +53,33 @@ Second test executed!
 First test executed!
 @AfterEach
 @AfterAll
+```
+> @AfterAll и и @BeforeAll должны быть static!
+> Это связано с тем, что по умолчанию
+> @TestInstance(TestInstance.Lifecycle.PER_METHOD)
+> 
+> Нужно поменять на @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
+```java
+import org.junit.jupiter.api.*;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class LifeCycleTestNotStatic {
+    @BeforeAll
+    void beforeAll(){
+        System.out.println("@BeforeAll");
+    }
+
+    @Test
+    public void first() {
+        System.out.println("First test executed!");
+    }
+
+    @AfterAll
+    void afterAll(){
+        System.out.println("@AfterAll");
+    }
+}
 ```
 
 1. @BeforeEach
