@@ -22,3 +22,8 @@ management:
   tracing:
     sampling:
       probability: 1.0
+
+# Swagger
+springdoc:
+  swagger-ui:
+    path: /api-docs
