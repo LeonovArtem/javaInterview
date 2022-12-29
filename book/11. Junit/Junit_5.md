@@ -3,6 +3,8 @@ Docs: https://junit.org/junit5/docs/current/user-guide/
 
 * [Assertions](#1-assertions)
 * [Сортировка](#2-order)
+* [@Disabled - отключаем тест](#3-disabled)
+* [@ParameterizedTest - передача нескольких параметров](#4-parameterizedtest)
 
 ## Жизненный цикл
 
@@ -200,6 +202,35 @@ public class OrderedMethodTest {
     @Test
     public void secondTest() {
         System.out.println("Second");
+    }
+}
+```
+### 3. @Disabled
+Отключаем тест
+```java
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+@Disabled
+public class DisabledTest {
+    @Test
+    void execute(){
+        System.out.println("Done!");
+    }
+}
+```
+
+### 4. @ParameterizedTest
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class ParameterizedTestExample {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"hello", "world"})
+    void execute(String message) {
+        System.out.println(message);
     }
 }
 ```

@@ -1,6 +1,7 @@
 package al.spring;
 
 import al.spring.testcontainers.DatabaseContainer;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -11,6 +12,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest
 @TestPropertySource(properties = {"app.scheduling.enable=false",})
 @Testcontainers
+@AutoConfigureMockMvc
 public abstract class BaseFunctionalTest {
     @Container
     public static final DatabaseContainer database = DatabaseContainer.getInstance();
