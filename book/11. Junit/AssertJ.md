@@ -2,10 +2,10 @@
 
 [pom.xml](..%2F..%2Fspring%2Fpom.xml)
 ```xml
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-        </dependency>
+<dependency>
+    <groupId>org.assertj</groupId>
+    <artifactId>assertj-core</artifactId>
+</dependency>
 ```
 1. Простой пример
 ```java
