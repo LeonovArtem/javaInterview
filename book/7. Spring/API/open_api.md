@@ -39,3 +39,35 @@ springdoc:
   swagger-ui:
     path: /api-docs
 ```
+
+### Swagger Аннотации
+
+* @Tag(name = "Пользователи")
+* @Operation
+* @ApiResponse
+* @Schema
+
+```java
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@RestController
+@RequestMapping("user")
+@RequiredArgsConstructor
+
+@Tag(name = "Пользователи")
+public class UserController {
+
+    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "Найти пользователя по ID", responses = {
+            @ApiResponse(responseCode = "200", description = "Пользователь", content = @Content(
+                    schema = @Schema(implementation = User.class)
+            )),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден", content = @Content(
+                    schema = @Schema(implementation = User.class)
+            )),
+    })
+    public User findById(@PathVariable int id) {
+        return userService.findById(id);
+    }
+}
+```
