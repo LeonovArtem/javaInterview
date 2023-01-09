@@ -67,7 +67,7 @@ factory через ```setBeanFactory()``` из этого интерфейса.
 * session - возвращает экземпляр бина для каждой HTTP сессии*
 
 ## Отличия компонентных аннотаций
-![](component_annotation.png)
+![](img/component_annotation.png)
 
 ### @Component
 Spring сканирует и регистрирует классы как bean-компоненты, 

@@ -1,4 +1,4 @@
-# **Этапы создания бинов**
+# Этапы создания бинов
 
 ```java
 import org.springframework.beans.factory.InitializingBean;

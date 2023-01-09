@@ -1,6 +1,6 @@
 # Words and phrases
-1. **I suppose** - я полагаю
-2. **I suggest** - я предпологаю
+1. **I suppose** - Я полагаю
+2. **I suggest** - Я предлагаю
 3. **Out of turn** - вне очереди
 4. **directly** - прямо
 5. **relating to** - относящихся
@@ -10,6 +10,7 @@
 9. **realize** - я понимаю
 10. **appreciate** - ценить
 11. **it works for me** - Меня устраивает
+12. **afterward** - потом  
 
 # Technical words
 1. **compiler** - компилятор
