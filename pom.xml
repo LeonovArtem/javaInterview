@@ -15,6 +15,7 @@
         <module>javaCore</module>
         <module>liveCoding</module>
         <module>reactiveSpring</module>
+        <module>springKafka</module>
     </modules>
 
     <parent>
