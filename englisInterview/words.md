@@ -21,4 +21,7 @@
 7. **requirement** - требование
 8. **substitution** - заменяемый
 9. **recognize** - распознавать, (узнаваемый)
-9. **efficient** - эффективный (So it must be more efficient)
+10. **efficient** - эффективный (So it must be more efficient)
+11. **will simplify** - упростит
+12. **simplifies** - упрощает
+13. **we have to configure** - мы должны настроить
