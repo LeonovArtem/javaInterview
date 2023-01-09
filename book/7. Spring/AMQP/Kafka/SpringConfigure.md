@@ -46,6 +46,7 @@ services:
 ```yaml
 spring:
   kafka:
+    # localhost:19093, localhost:19094 - если нужно несколько брокеров   
     bootstrap-servers: ${APP_KAFKA_CONSUMER_BOOTSTRAP_SERVERS:localhost:19093}
 ```
 ### 1. Simple message
