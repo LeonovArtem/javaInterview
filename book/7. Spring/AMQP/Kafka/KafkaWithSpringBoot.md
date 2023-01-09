@@ -1,4 +1,11 @@
-# Spring Config
+# Kafka in Spring Boot
+1. [Подключение](#1-spring-config)
+2. [Отправка простого сообщения](#2-simple-message)
+3. [Настройка формата сообщений Json](#3-json-format)
+
+### 1. Spring Config
+Как настроить
+
 Docker
 ```yaml
 version: '3'
@@ -43,13 +50,31 @@ services:
       - kafka
 ```
 [kafka.yml](..%2F..%2F..%2F..%2FspringKafka%2Fsrc%2Fmain%2Fresources%2Fkafka.yml)
+
+Настроить `consumer и producer`
 ```yaml
 spring:
   kafka:
     # localhost:19093, localhost:19094 - если нужно несколько брокеров   
-    bootstrap-servers: ${APP_KAFKA_CONSUMER_BOOTSTRAP_SERVERS:localhost:19093}
+    bootstrap-servers: ${APP_KAFKA_SERVERS:localhost:19093}
 ```
-### 1. Simple message
+Если нужно настроить только `консьюмеры` 
+(к примеру нам нужно только читать сообщения из кафки в отдельном сервисе):
+```yaml
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${APP_KAFKA_CONSUMER_SERVERS:localhost:19093}
+```
+Аналогично для Producer
+```yaml
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: ${APP_KAFKA_PRODUCER_SERVERS:localhost:19093}
+```
+
+### 2. Simple message
 ```java
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -97,5 +122,66 @@ public class SimpleMessageConsumer {
     public void listen(String message) {
         System.out.println(message);
     }
+}
+```
+### 3. Json format
+Настройка формата сообщений Json
+```yaml
+spring:
+  kafka:
+    bootstrap-servers: ${APP_KAFKA_CONSUMER_BOOTSTRAP_SERVERS:localhost:19093}
+
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Default: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+```
+Producer
+```java
+import com.aleonov.springkafka.payload.UserDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class SimpleMessageProducer {
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public void send(UserDto userDto) {
+        log.info("SimpleMessageProducer: Message send! message: {}", userDto);
+        Message<UserDto> message = MessageBuilder
+                .withPayload(userDto)
+                .setHeader(KafkaHeaders.TOPIC, "topic1")
+                .build();
+
+        kafkaTemplate.send(message);
+    }
+}
+```
+Dto
+```java
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class UserDto {
+    private Integer id;
+    private String name;
 }
 ```
