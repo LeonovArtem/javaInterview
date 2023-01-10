@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimpleMessageConsumer {
 
-    @KafkaListener(id = "myId", topics = "topic1")
+    @KafkaListener(id = "myId", topics = "topic1", concurrency = "4")
     public void listen(UserDto userDto) {
         log.warn("SimpleMessageConsumer: {}", userDto);
     }

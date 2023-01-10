@@ -24,6 +24,11 @@ The partitions are important because they enable parallelization of topics.
 
 Разделы важны, потому что они позволяют распараллелить темы.
 ![anatomu_of_topics.png](img%2Fanatomu_of_topics.png)
+
+- Топик делится на Partitions
+- Каждый partitions сохраняет порядок
+- Каждое сообщение в partitions получает номер или offset
+
 ### 5. Record(message)
 ![Record.png](img%2FRecord.png)
 - key

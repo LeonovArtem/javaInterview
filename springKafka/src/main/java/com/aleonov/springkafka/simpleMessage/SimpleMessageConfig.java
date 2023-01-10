@@ -10,7 +10,7 @@ public class SimpleMessageConfig {
     @Bean
     public NewTopic topic() {
         return TopicBuilder.name("topic1")
-                .partitions(1)
+                .partitions(2)
                 .replicas(1)
                 .build();
     }

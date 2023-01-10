@@ -20,6 +20,7 @@ public class SimpleMessageProducer {
         Message<UserDto> message = MessageBuilder
                 .withPayload(userDto)
                 .setHeader(KafkaHeaders.TOPIC, "topic1")
+                .setHeader(KafkaHeaders.KEY, "user_key_" + userDto.getId())
                 .build();
 
         kafkaTemplate.send(message);

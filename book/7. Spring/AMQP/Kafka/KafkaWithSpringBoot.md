@@ -2,6 +2,8 @@
 1. [Подключение](#1-spring-config)
 2. [Отправка простого сообщения](#2-simple-message)
 3. [Настройка формата сообщений Json](#3-json-format)
+4. [Как задать количество консьюмеров](#4-count-consumers)
+5. [Маршртизация по ключу](#5-routing)
 
 ### 1. Spring Config
 Как настроить
@@ -185,3 +187,48 @@ public class UserDto {
     private String name;
 }
 ```
+### 4. Count consumers
+Как задать количество консьюмеров:
+
+`concurrency = "4"` - создает 4 консьюмера в одной группе
+```java
+@Slf4j
+@Service
+public class SimpleMessageConsumer {
+
+    @KafkaListener(id = "myId", topics = "topic1", concurrency = "4")
+    public void listen(UserDto userDto) {
+        log.warn("SimpleMessageConsumer: {}", userDto);
+    }
+}
+```
+Внутри используется `ConcurrentMessageListenerContainer`, который создает несколько `KafkaMessageListenerContainer`
+```
+2023-01-10T13:06:14.546+03:00  INFO 19632 --- [     myId-2-C-1] o.s.k.l.KafkaMessageListenerContainer    : myId: partitions assigned: []
+2023-01-10T13:06:14.546+03:00  INFO 19632 --- [     myId-3-C-1] o.s.k.l.KafkaMessageListenerContainer    : myId: partitions assigned: []
+2023-01-10T13:06:14.553+03:00  INFO 19632 --- [     myId-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : myId: partitions assigned: [topic1-0]
+2023-01-10T13:06:14.553+03:00  INFO 19632 --- [     myId-1-C-1] o.s.k.l.KafkaMessageListenerContainer    : myId: partitions assigned: [topic1-1]
+```
+`myId: partitions assigned: []` - не привязался ни к одной партиции (Это потому что у нас 2 партиции в топике), а консьюмеров 4!
+
+### 5. Routing
+Если мы хотим что бы сообщения отправлялись в определенный (всегда в один и тот-же) partitions
+
+`.setHeader(KafkaHeaders.KEY, "user_key_" + id)`
+```java
+public class SimpleMessageProducer {
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public void send(UserDto userDto) {
+        log.error("SimpleMessageProducer: Message send! message: {}", userDto);
+        Message<UserDto> message = MessageBuilder
+                .withPayload(userDto)
+                .setHeader(KafkaHeaders.TOPIC, "topic1")
+                .setHeader(KafkaHeaders.KEY, "user_key_" + userDto.getId())
+                .build();
+
+        kafkaTemplate.send(message);
+    }
+}
+```
+
