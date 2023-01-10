@@ -1,7 +1,15 @@
 # Basic Terms (Основные термины)
 
-### 1. Кластер(cluster) - Несколько экземпляров(Multiple instances)
+1. [Cluster](#1-cluster)
+2. [Node](#2-node)
+3. [Kafka](#3-kafka)
+4. [Partition](#4-partition)
+5. [Message](#5-record--message-)
+6. [Zookeeper](#6-zookeeper)
 
+### 1. Cluster
+Кластер - Несколько экземпляров
+Cluster - Multiple instances
 ![Cluster_1.png](img%2FCluster_1.png)
 
 ### 2. Node
