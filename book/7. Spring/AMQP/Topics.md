@@ -6,3 +6,5 @@
 - Два разных подхода к обмену сообщениями - https://habr.com/ru/company/itsumma/blog/416629/ 
 - Сравнение - https://mcs.mail.ru/blog/rabbitmq-ili-apache-kafka 
 - Сравнение(Slerm) - https://habr.com/ru/company/itsumma/blog/416629/ 
+
+### 4. Пример для микросервисов - [ссылка](https://habr.com/ru/company/otus/blog/663264/)
