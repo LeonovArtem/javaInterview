@@ -8,6 +8,7 @@
 
 ### Пример 1:
 Было 3 консьюмера (1 отключился). Кафка само балансируется - на консьюмер 2 трафик увеличился вдвое!
+
 ![maintainable_1.png](img%2Fmaintainable_1.png)
 
 ### Порядок чтения
@@ -26,6 +27,7 @@
 ### Репликация
 
 ![Replications_1.png](img%2FReplications_1.png)
+
 Реплик лучше выбирать **3** !
 
 ![Replications_factor.png](img%2FReplications_factor.png)
