@@ -124,6 +124,12 @@ public class SimpleMessageConsumer {
     public void listen(String message) {
         System.out.println(message);
     }
+
+    // ConsumerRecord<Ключ, DeserializeObject>    
+    @KafkaListener(id = "newMyId", topics = "topic1")
+    public void consume(ConsumerRecord<String, UserDto> record) {
+        log.warn("AnotherConsumer: value: {}, offset: {}", record.value(), record.offset());
+    }
 }
 ```
 ### 3. Json format
