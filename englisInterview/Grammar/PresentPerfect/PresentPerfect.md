@@ -22,3 +22,7 @@
 
 
 ## Present Perfect Question
+Have/Has + подлежащее + ever(необязательно) + V3
+![Present_Perfect_qustions.png](img%2FPresent_Perfect_qustions.png)
+
+Для отрицательных ответов вы также можете использовать фразу **Not yet**.
