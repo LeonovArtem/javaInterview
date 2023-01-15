@@ -1,8 +1,9 @@
 # **Java Multithreading**
 
 - Отличие Thread от Runnable
-- Ключевое слово volatile (когерентность кэша)
-- Ключевое слово synchronized
+- [Поток-демон](#поток-демон)
+- [Ключевое слово volatile (когерентность кэша)](#ключевое-слово-volatile--когерентность-кэша-)
+- [Ключевое слово synchronized](#ключевое-слово-synchronized)
 - wait, notify
 - Паттерн Consumer Producer
 - Прерывание потоков
@@ -41,6 +42,59 @@ class MyRunner implements Runnable {
 
 Плюс использования ```Runnable``` состоит в том, что это позволяет логически 
 отделить выполнение задачи от логики управления потоками.
+
+## Поток-демон
+
+Потоками-демонами называются потоки, работающие в фоновом режиме для нашей программы.
+
+В Java процесс завершается тогда, когда завершается последний его поток. 
+Даже если метод main() уже завершился, но еще выполняются порожденные им потоки, система будет ждать их завершения.
+Однако это правило не относится к особому виду потоков – демонам. 
+Если завершился последний обычный поток процесса, и остались только потоки-демоны, то они будут принудительно завершены и выполнение процесса закончится. 
+
+Чаще всего потоки-демоны используются для выполнения фоновых задач, обслуживающих процесс в течение его жизни.
+
+```thread.setDaemon(true);``` - пометить поток как демон
+
+```java
+public class DaemonExample {
+    public static void main(String[] args) throws InterruptedException {
+        runDaemon();
+        runNotDaemon();
+        System.out.println("Main is DONE!");
+    }
+
+    private static void runNotDaemon() {
+        var thread = new Thread(() -> {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("NOT Daemon done");
+        });
+        thread.start();
+    }
+
+    /**
+     * Если завершился последний обычный поток процесса, и остались только потоки-демоны,
+     * то они будут принудительно завершены и выполнение процесса закончится
+     */
+    private static void runDaemon() {
+        var thread = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Daemon is done!");
+        });
+        thread.setDaemon(true);
+        thread.start();
+    }
+}
+```
 
 ## Ключевое слово volatile (когерентность кэша)
 ```volatile``` - используется когда один поток пишет в переменную, а все остальные потоки
