@@ -97,7 +97,7 @@ synchronized (list) {
 
 ![ConcurrentHashMap_topic.png](img%2FConcurrentHashMap_topic.png)
 
-![ConcurrentHashMap_not_null.png](..%2F..%2FjavaCore%2Fsrc%2Fmain%2Fjava%2Forg%2Faleonov%2Fjavainteview%2Fmultithreiding%2Fcollection%2FConcurrentHashMap_not_null.png)
+![ConcurrentHashMap_not_null.png](img%2FConcurrentHashMap_not_null.png)
 
 ConcurrentHashMap делит элементы на сегменты(по кол-ву бакетов). 
 И поэтому несколько потоков могут одновременно изменять данные в нескольких сегментах (бакетах), но не в одном и том же!
@@ -105,7 +105,6 @@ ConcurrentHashMap делит элементы на сегменты(по кол-
 
 Работает более эффективно чем Synchronized collections 
 
-![ConcurrentHashMap.png](img%2FConcurrentHashMap.png)
 
 Пример:
 ```java
