@@ -286,7 +286,7 @@ list.add("New element");
 [Содержание](#content)
 ### 4. CopyOnWriteArraySet
 
-Работает аналогично **CopyOnWriteArrayList**
+Работает аналогично [CopyOnWriteArrayList](#3-copyonwritearraylist)
 
 Пример:
 ```java
