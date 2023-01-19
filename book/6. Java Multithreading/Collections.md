@@ -1,4 +1,4 @@
-# Java Collections
+# Concurrent Collections
 - Короткий видеоурок синхронизированные коллекции: [ссылка](https://www.youtube.com/watch?v=nifOyLM4TrI&list=PLqj7-hRTFl_oDMBjI_EstsFcDAwt-Arhs&index=27)
 - ConcurrentHashMap: [ссылка](https://www.youtube.com/watch?v=j4C2o_j_y6U&list=PLqj7-hRTFl_oDMBjI_EstsFcDAwt-Arhs&index=37)
 
