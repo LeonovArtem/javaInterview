@@ -5,6 +5,8 @@
 ## Content
 - [Synchronized collections](#1-synchronized-collections)
 - [ConcurrentHashMap](#2-concurrenthashmap)
+- [CopyOnWriteArrayList](#3-copyonwritearraylist)
+- [CopyOnWriteArraySet](#4-copyonwritearrayset)
 
 ![Sync_collections_1.png](img%2FSync_collections_1.png)
 
@@ -95,6 +97,8 @@ synchronized (list) {
 [Содержание](#content)
 ### 2. ConcurrentHashMap
 
+Работает более эффективно чем Synchronized collections
+
 ![ConcurrentHashMap_topic.png](img%2FConcurrentHashMap_topic.png)
 
 ![ConcurrentHashMap_not_null.png](img%2FConcurrentHashMap_not_null.png)
@@ -103,8 +107,7 @@ ConcurrentHashMap делит элементы на сегменты(по кол-
 И поэтому несколько потоков могут одновременно изменять данные в нескольких сегментах (бакетах), но не в одном и том же!
 Это называется **SegmentLock** или **BacketLock**.
 
-Работает более эффективно чем Synchronized collections 
-
+![ConcurrentHashMap.png](img%2FConcurrentHashMap.png)
 
 Пример:
 ```java
@@ -190,4 +193,113 @@ Exception in thread "main" java.lang.NullPointerException
 	at java.base/java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:1006)
 	at org.aleonov.javainteview.multithreiding.collection.ConcurrentHashMapEx2.main(ConcurrentHashMapEx2.java:11)
 ```
+[Содержание](#content)
+### 3. CopyOnWriteArrayList
+
+![CopyOnWrite.png](img%2FCopyOnWrite.png)
+
+Пример 1:
+```java
+public class CopyOnWriteArrListEx1 {
+    public static void main(String[] args) throws InterruptedException {
+        // var list = new CopyOnWriteArrayList<>();
+        var list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+        list.add("Four");
+
+        Runnable runnable1 = () -> {
+             var iterator = list.iterator();
+             while (iterator.hasNext()){
+                 try {
+                     Thread.sleep(100);
+                 } catch (InterruptedException e) {
+                     throw new RuntimeException(e);
+                 }
+
+                 System.out.println(iterator.next());
+             }
+        };
+
+        Runnable runnable2 = () -> {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            list.remove(3);
+            list.add("New element");
+        };
+
+        execute(list, runnable1, runnable2);
+    }
+
+    private static void execute(List<Object> list, Runnable runnable1, Runnable runnable2) throws InterruptedException {
+        System.out.println(list);
+        var thread1 = new Thread(runnable1);
+        var thread2 = new Thread(runnable2);
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(list);
+    }
+}
+```
+OUT:
+```
+[One, Two, Three, Four]
+One
+Exception in thread "Thread-0" java.util.ConcurrentModificationException
+...
+[One, Two, Three, New element]
+
+```
+Решение:
+```var list = new CopyOnWriteArrayList<>();```
+
+OUT:
+
+```
+[One, Two, Three, Four]
+One
+Two
+Three
+Four
+[One, Two, Three, New element]
+```
+
+`var iterator = list.iterator();` - иттератор запоминает состояние коллекции на момент вызова. 
+Что происходит в параллельных потоках ему не важно!
+
+Каждый раз при изменении коллекции создается его копия
+```java
+list.remove(3);
+list.add("New element");
+```
+
+**Вывод:** нужно использовать когда есть много операций чтения и мало операций изменения (каждый раз создается копия исходного list)
+
+[Содержание](#content)
+### 4. CopyOnWriteArraySet
+
+Работает аналогично **CopyOnWriteArrayList**
+
+Пример:
+```java
+public class CopyOnWriteArraySetEx {
+    public static void main(String[] args) {
+        Set<String> users = new CopyOnWriteArraySet<>();
+        users.add("user_1");
+        users.add("user_2");
+        users.add("user_3");
+
+        System.out.println(users);
+    }
+}
+```
+
 [Содержание](#content)
