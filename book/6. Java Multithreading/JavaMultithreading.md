@@ -11,7 +11,7 @@
 - [Callable и Future](#callable-и-future)
 - [Thread pool](#thread-pool)
 - [ReentrantLock](#reentrantlock)
-- [ArrayBlockingQueue](#arrayblockingqueue)
+- [Concurrent Collections](Collections.md)
 
 ## Отличие Thread от Runnable
 ```java
@@ -357,61 +357,3 @@ class Runner {
 
 ```ReentrantLock``` можно использовать, когда в разных потоках, необходимо забирать
 локи в разных порядках.
-
-
-## ArrayBlockingQueue
-```java
-public class Test {
-    private final static ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
-    private final static Random random = new Random();
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread producerThread = createProduceThread();
-        Thread consumerThread = createConsumerThread();
-
-        producerThread.start();
-        consumerThread.start();
-
-        producerThread.join();
-        consumerThread.join();
-    }
-
-    public static void produce() throws InterruptedException {
-        while (true) {
-            int putInt = random.nextInt(100);
-            queue.put(putInt);
-            System.out.printf("Put in the queue message with payload: %s \n", putInt);
-        }
-    }
-
-    public static void consume() throws InterruptedException {
-        while (true) {
-            int takedInt = queue.take();
-
-            System.out.printf("Taked from the queue message with payload: %s \n", takedInt);
-        }
-    }
-
-    public static Thread createProduceThread() {
-        return
-                new Thread(() -> {
-                    try {
-                        produce();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-    }
-
-    public static Thread createConsumerThread() {
-        return
-                new Thread(() -> {
-                    try {
-                        consume();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-    }
-}
-```
