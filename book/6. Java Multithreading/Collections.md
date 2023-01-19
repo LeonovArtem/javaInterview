@@ -7,6 +7,7 @@
 - [ConcurrentHashMap](#2-concurrenthashmap)
 - [CopyOnWriteArrayList](#3-copyonwritearraylist)
 - [CopyOnWriteArraySet](#4-copyonwritearrayset)
+- [ArrayBlockingQueue](#5-arrayblockingqueue)
 
 ![Sync_collections_1.png](img%2FSync_collections_1.png)
 
@@ -303,3 +304,99 @@ public class CopyOnWriteArraySetEx {
 ```
 
 [Содержание](#content)
+### 5. ArrayBlockingQueue
+Элементы добавляются в конец (FIFO)
+
+```java
+public class ArrayBlockingQueueEx {
+    public static void main(String[] args) {
+        var queue = new ArrayBlockingQueue<>(4);
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+
+        System.out.println(queue);
+    }
+}
+```
+Разница между add и offer
+
+`.ddd()` - при попытке добавить больще элементов чем размер очереди будет выброшено исключение `IllegalStateException: Queue full`
+```java
+public class ArrayBlockingQueueEx {
+    public static void main(String[] args) {
+        var queue = new ArrayBlockingQueue<>(4);
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        
+        // IllegalStateException: Queue full
+        queue.add(5);
+
+        System.out.println(queue);
+    }
+}
+```
+`offer()` -  исключения не будет, но элемент не добавится
+
+```java
+public class ArrayBlockingQueueEx {
+    public static void main(String[] args) {
+        var queue = new ArrayBlockingQueue<>(4);
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+
+        queue.offer(5);
+
+        System.out.println(queue);
+    }
+}
+```
+OUT: ```[1, 2, 3, 4]```
+
+![ArrayBlockingQueue.png](img%2FArrayBlockingQueue.png)
+
+`Producer` - добавляет элементы
+
+`Consumer` - забирает элементы
+
+```java
+public class ArrayBlockingQueueEx1 {
+    public static void main(String[] args) {
+        var queue = new ArrayBlockingQueue<>(4);
+
+        var producer = new Thread(() -> {
+            var i = 0;
+            while (true) {
+                ++i;
+                try {
+                    queue.put(i);
+                    System.out.println("produce: " + i + queue);
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        var consumer = new Thread(() -> {
+            while (true) {
+                try {
+                    var element = queue.take();
+                    System.out.println("Consumer: " + element);
+                    Thread.sleep(9000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        producer.start();
+        consumer.start();
+    }
+}
+```

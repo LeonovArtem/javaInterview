@@ -3,7 +3,7 @@ package org.aleonov.javainteview.multithreiding.collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class CopyOnWriteArrListEx1 {
+public class CopyOnWriteArrListEx {
     public static void main(String[] args) throws InterruptedException {
         var list = new CopyOnWriteArrayList<>();
         list.add("One");
