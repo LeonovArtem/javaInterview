@@ -4,6 +4,9 @@
 3) Improving the existing codebase.
 4) Design and implement Java application
 
+Mostly i worked like a backend developer. But i have experience with frontend (React and VueJs)
+I have seen information on the main page of company
+
 
 More: https://www.javatpoint.com/java-developer-roles-and-responsibilities
 
