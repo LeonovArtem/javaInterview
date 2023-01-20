@@ -10,6 +10,15 @@ Mostly I worked like a backend developer. But i have experience with frontend (R
 I have seen information on the main page of company
 
 ___________________________________________________________________________________________________
+
+it's incredible case. We met on Linkedin.
+
+I was interested in any information about working in Bulgaria.
+
+And he offered to talk to your company
+
+I was looking for .. (Я искал)
+___________________________________________________________________________________________________
 More: https://www.javatpoint.com/java-developer-roles-and-responsibilities
 
 - We have many different teams (У нас много команд)
