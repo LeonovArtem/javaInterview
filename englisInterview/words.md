@@ -26,3 +26,7 @@
 11. **will simplify** - упростит
 12. **simplifies** - упрощает
 13. **we have to configure** - мы должны настроить
+14 **notice period** - период уведомления
+______________________________________________
+
+He suggested that I contact you - Он предложил мне связаться с вами
