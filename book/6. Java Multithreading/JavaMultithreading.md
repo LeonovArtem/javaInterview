@@ -3,15 +3,16 @@
 - [Отличие Thread от Runnable](#отличие-thread-от-runnable)
 - [Поток-демон](#поток-демон)
 - [Ключевое слово volatile (когерентность кэша)](#ключевое-слово-volatile)
+- [Deadlock, Livelock, Lock Starvation](#deadlock-livelock-lock-starvation)
 - [Ключевое слово synchronized](#ключевое-слово-synchronized)
 - [Монитор(мьютекс)](#монитор)
 - [wait, notify](#wait-notify)
 - [Паттерн Consumer Producer](#паттерн-consumer-producer)
 - [Прерывание потоков](#прерывание-потоков)
 - [Callable и Future](#callable-и-future)
-- [Thread pool](#thread-pool)
 - [ReentrantLock](#reentrantlock)
-- [Concurrent Collections](Collections.md)
+- [Thread pool](topics/ThreadPool.md)
+- [Concurrent Collections](topics/Collections.md)
 
 ## Отличие Thread от Runnable
 ```java
@@ -109,6 +110,43 @@ public class DaemonExample {
 Потоки могут распределиться по разным ядрам процессора и закэшировать значение переменной,
 значение которой может поменяться. Вследствие чего, у потоков будет не актуальное значение
 это переменной.
+
+## Deadlock, Livelock, Lock Starvation
+![problem_locks.png](img%2Fproblem_locks.png)
+### DeadLock
+`DeadLock` - два потока ждут друг друга до бесконечности. При этом потоки ничего не делают.
+Проблема вознивает, когда мы синхронизируемся в двух потоках в разном порядке
+
+![java-deadlock.png](img%2Fjava-deadlock.png)
+
+```java
+public class DeadLockEx {
+    public static void main(String[] args) throws InterruptedException {
+        Object lock1 = new Object();
+        Object lock2 = new Object();
+        var thread1 = new Thread(() -> Runner.run(lock1, lock2));
+        var thread2 = new Thread(() -> Runner.run(lock2, lock1));
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+
+        System.out.println("Main done");
+    }
+
+    private class Runner {
+        public static void run(Object ob1, Object ob2) {
+            System.out.println("Попытка хахватить монитор объекта 1");
+            synchronized (ob1) {
+                System.out.println("монитор объекта 1 захвачен");
+                synchronized (ob2) {
+                    System.out.println("Run..");
+                }
+            }
+        }
+    }
+}
+```
 
 ## Ключевое слово synchronized
 ```synchronized``` - работает таким образом, что только один поток в момент времени может
@@ -300,37 +338,6 @@ public class Example {
 }
 ```
 
-[Содержание](#java-multithreading)
-
-## Thread pool
-
-**Thread pool** - пул потоков, позволяет выполнять задания в N потоках.
-```java
-public class Example {
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-
-        for (int i = 0; i < 5; i++) {
-            executorService.submit(new Task(i));
-        }
-
-        executorService.shutdown();
-    }
-}
-
-class Task implements Runnable {
-    private final int id;
-
-    Task(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public void run() {
-        System.out.printf("The task with id %d executed \n", id);
-    }
-}
-```
 [Содержание](#java-multithreading)
 
 ## ReentrantLock

@@ -9,7 +9,7 @@
 - [CopyOnWriteArraySet](#4-copyonwritearrayset)
 - [ArrayBlockingQueue](#5-arrayblockingqueue)
 
-![Sync_collections_1.png](img%2FSync_collections_1.png)
+![Sync_collections_1.png](..%2Fimg%2FSync_collections_1.png)
 
 ### 1. Synchronized collections
 Пример1:
@@ -100,15 +100,15 @@ synchronized (list) {
 
 Работает более эффективно чем Synchronized collections
 
-![ConcurrentHashMap_topic.png](img%2FConcurrentHashMap_topic.png)
+![ConcurrentHashMap_topic.png](..%2Fimg%2FConcurrentHashMap_topic.png)
 
-![ConcurrentHashMap_not_null.png](img%2FConcurrentHashMap_not_null.png)
+![ConcurrentHashMap_not_null.png](..%2Fimg%2FConcurrentHashMap_not_null.png)
 
 ConcurrentHashMap делит элементы на сегменты(по кол-ву бакетов). 
 И поэтому несколько потоков могут одновременно изменять данные в нескольких сегментах (бакетах), но не в одном и том же!
 Это называется **SegmentLock** или **BacketLock**.
 
-![ConcurrentHashMap.png](img%2FConcurrentHashMap.png)
+![ConcurrentHashMap.png](..%2Fimg%2FConcurrentHashMap.png)
 
 Пример:
 ```java
@@ -197,7 +197,7 @@ Exception in thread "main" java.lang.NullPointerException
 [Содержание](#content)
 ### 3. CopyOnWriteArrayList
 
-![CopyOnWrite.png](img%2FCopyOnWrite.png)
+![CopyOnWrite.png](..%2Fimg%2FCopyOnWrite.png)
 
 Пример 1:
 ```java
@@ -358,7 +358,7 @@ public class ArrayBlockingQueueEx {
 ```
 OUT: ```[1, 2, 3, 4]```
 
-![ArrayBlockingQueue.png](img%2FArrayBlockingQueue.png)
+![ArrayBlockingQueue.png](..%2Fimg%2FArrayBlockingQueue.png)
 
 `Producer` - добавляет элементы
 

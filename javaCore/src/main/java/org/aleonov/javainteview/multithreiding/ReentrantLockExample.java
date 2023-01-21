@@ -20,7 +20,7 @@ public class ReentrantLockExample {
     public static class Runner {
         private int i;
 
-        Lock lock = new ReentrantLock();
+        private final Lock lock = new ReentrantLock();
 
         public void increase() {
             lock.lock();
