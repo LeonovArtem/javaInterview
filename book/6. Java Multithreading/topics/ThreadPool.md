@@ -1,4 +1,10 @@
-## Thread pool
+# Thread pool
+
+- [FixedThreadPool](#fixedthreadpool)
+- [ScheduleThreadPool](#schedulethreadpool)
+- [CachedThreadPool](#cachedthreadpool)
+
+## FixedThreadPool
 
 Thread pool - пул потоков, позволяет выполнять задания в N потоках.
 
@@ -104,6 +110,45 @@ public class ScheduleThreadPool {
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
         for (int i = 0; i < 4; i++) {
             scheduledThreadPool.schedule(new MyTask(i), 3, TimeUnit.SECONDS);
+        }
+
+        System.out.println("Main is down");
+    }
+
+    private static class MyTask implements Runnable {
+        private final Integer numTask;
+
+        public MyTask(Integer numTask) {
+            this.numTask = numTask;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            var name = Thread.currentThread().getName();
+            System.out.println(name + " :Task " + numTask + " is done");
+        }
+    }
+
+}
+```
+
+## CachedThreadPool
+
+![thread_pool_4.png](..%2Fimg%2Fthread_pool_4.png)
+Пример
+```java
+public class CashedThreadPool {
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService scheduledThreadPool = Executors.newCachedThreadPool();
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(100);
+            scheduledThreadPool.execute(new MyTask(i));
         }
 
         System.out.println("Main is down");
