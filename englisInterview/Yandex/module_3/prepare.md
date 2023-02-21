@@ -15,3 +15,6 @@ The customer **approved** the final version of our program, so we can move on an
 we can move on
 
 - **analyze** ['эпрув'] - анализировать
+- **volunteer** ['волонте'] - доброволец
+
+### Talking about your experience of working on a team at a project interview
