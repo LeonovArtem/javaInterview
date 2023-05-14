@@ -16,12 +16,15 @@
         <module>liveCoding</module>
         <module>reactiveSpring</module>
         <module>springKafka</module>
+
+        <module>resilience/orderServiceMvc</module>
+        <module>resilience/clientServiceMVC</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.6</version>
         <relativePath/>
     </parent>
 </project>
