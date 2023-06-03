@@ -1,0 +1,17 @@
+server:
+  port: 9091
+spring:
+  config:
+    import: circular-breakers.yml, api.yml,
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+      client:
+        default-to-properties: false
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 8000
+            loggerLevel: FULL

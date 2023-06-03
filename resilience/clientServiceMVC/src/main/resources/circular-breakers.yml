@@ -18,10 +18,43 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       minimumNumberOfCalls: 5
       automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 5s
-#      slidingWindowSize: 10
-#      permittedNumberOfCallsInHalfOpenState: 3
-#      recordExceptions:
-#        - org.springframework.web.client.HttpServerErrorException
-#        - java.util.concurrent.TimeoutException
-#        - java.io.IOException
+      waitDurationInOpenState: 60s
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+
+    jiraFeignClient:
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 5
+      failureRateThreshold: 30
+      minimumNumberOfCalls: 5
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 30s
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+
+resilience4j.retry:
+  instances:
+    live_event_info:
+      maxAttempts: 4
+      waitDuration: 5000
+      failAfterMaxAttempts: true
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 4
+      retryExceptions:
+        - java.lang.RuntimeException
+        - java.io.IOException
+        - java.util.concurrent.TimeoutException
+
+
+resilience4j.ratelimiter:
+  instances:
+    live-rate-limiter:
+      limitForPeriod: 1
+      limitRefreshPeriod: 250ms
+      timeoutDuration: 60s

@@ -1,0 +1,4 @@
+app:
+  orders:
+    base-url: "http://localhost:9090/api/v1"
+    get-list: "/orders"
